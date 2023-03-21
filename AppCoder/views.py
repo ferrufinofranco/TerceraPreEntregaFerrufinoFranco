@@ -3,7 +3,8 @@ from AppCoder.models import *
 from django.http import HttpResponse
 
 # Create your views here.
-
+def home(request):
+    return render(request, "base.html")
 def cursos(request):
     allCursos = Curso.objects.all()
     context = {
@@ -23,3 +24,15 @@ def estudiantes(request):
 
 def profesores(request):
     return render(request, "base.html")
+
+def registroEstudiante(request):
+
+    if request.method == 'POST':
+
+        curso = Curso (request.POST['curso'], request.POST['camada'])
+
+        curso.save()
+
+        return render(request, "base.html")
+
+    return render(request, "AppCoder/registroEstudiante.html")
