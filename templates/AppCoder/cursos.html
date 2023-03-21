@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 
 {% block contenidoQueCambia%}
-    <!--<h1>El contenido ha sido modificado</h1>-->
+    <form action="{% url 'AppCoderCursos' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Registrar curso">
+    </form>
         {% if cursos %}
             {% for curso in cursos %}
-                <p>curso : {{curso.nombre}}</p>
+                <p>curso: {{curso.nombre}}</p>
                 <p>camada: {{curso.camada}}</p>
             {% endfor %}
         {% else %}

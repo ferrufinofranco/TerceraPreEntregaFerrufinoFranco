@@ -7,13 +7,13 @@
     <title>Registro de Estudiantes</title>
 </head>
 <body>
-  <form action="/registroEstudiante/" method="POST">{% csrf_token %}
+  <form action="registroEstudiante" method="POST">{% csrf_token %}
 
-    <P>Nombre: <input type="text" name="nombre"></P>
+    <P>Nombre: <input type="text" name='nombre'></P>
 
-    <p>Apellido <input type="text" name="apellido"></p>
+    <p>Apellido: <input type="text" name='apellido'></p>
 
-    <p>Email <input type="email" name="email"></p>
+    <p>Email: <input type="email" name='email'></p>
 
     <input type="submit" value="Finalizar Registro!">
 

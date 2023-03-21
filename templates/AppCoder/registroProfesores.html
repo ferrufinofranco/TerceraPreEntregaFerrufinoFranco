@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block contenidoQueCambia%}
+    <form action="{% url 'AppCoderRegistroProfesores' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Registrar profesor">
+    </form>
+        {% if profesores %}
+            {% for profesor in profesores %}
+                <p>nombre: {{profesor.nombre}}</p>
+                <p>apellido: {{profesor.apellido}}</p>
+                <p>email: {{profesor.email}}</p>
+                <p>profesion: {{profesor.profesion}}</p>
+            {% endfor %}
+        {% endif %}
+        <p>Profesor Registrado</p>
+{% endblock %}
