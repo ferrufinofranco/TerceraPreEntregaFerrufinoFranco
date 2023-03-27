@@ -6,6 +6,7 @@
         <input type="submit" value="Buscar Curso">
     </form>
     {% if cursos %}
+        <h3>Los cursos encontrados son:</h3>
         {% for curso in cursos %}
             <p>Curso: {{ curso.nombre }} - Camada: {{ curso.camada }}</p>
         {% endfor %}

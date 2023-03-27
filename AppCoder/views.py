@@ -27,9 +27,9 @@ def registroCursos(request):
     return render(request, "AppCoder/registroCursos.html", context=context)
 
 def busquedaCursos(request):
-    mi_formulario = BusquedaCursoForm(request.GET)
-    if mi_formulario.is_valid():
-        info = mi_formulario.cleaned_data
+    form_busquedaCurso = BusquedaCursoForm(request.GET)
+    if form_busquedaCurso.is_valid():
+        info = form_busquedaCurso.cleaned_data
         cursosFiltrados = Curso.objects.filter(nombre__icontains=info['nombre'])
     else:
         cursosFiltrados = None
