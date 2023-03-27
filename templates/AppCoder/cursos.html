@@ -1,9 +1,9 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 
-{% block contenidoQueCambia%}
+{% block contenidoNavBar %}
     <form action="{% url 'AppCoderCursos' %}" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ formRegistroCursos.as_p }}
         <input type="submit" value="Registrar curso">
     </form>
         {% if cursos %}
@@ -11,7 +11,5 @@
                 <p>curso: {{curso.nombre}}</p>
                 <p>camada: {{curso.camada}}</p>
             {% endfor %}
-        {% else %}
-            <h1>No hay cursos en el momento</h1>
         {% endif %}
 {% endblock %}

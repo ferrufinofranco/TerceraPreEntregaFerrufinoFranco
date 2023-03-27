@@ -1,66 +1,76 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from AppCoder.models import *
-from AppCoder.forms import CursoForm, ProfesorForm
+from AppCoder.forms import CursoForm, ProfesorForm, BusquedaCursoForm
+from django.contrib import messages
 from django.http import HttpResponse
 
 # Create your views here.
 def home(request):
-    return render(request, "base.html")
-def cursos(request):
-
+    return render(request, "base/base.html")
+def registroCursos(request):
     if request.method == 'POST':
-        mi_formulario = CursoForm(request.POST)
+        registroCursos = CursoForm(request.POST)
 
-        if mi_formulario.is_valid():
-            informacion = mi_formulario.cleaned_data
-            curso_save = Curso(
-                nombre=informacion['nombre'],
-                camada=informacion['camada']
+        if registroCursos.is_valid():
+            info = registroCursos.cleaned_data
+            registroCurso = Curso(
+                nombre=info['nombre'],
+                camada=info['camada']
             )
-            curso_save.save()
+            registroCurso.save()
 
-
-    allCursos = Curso.objects.all()
+    all_cursos = Curso.objects.all()
     context = {
-        "cursos": allCursos,
-        "form": CursoForm()
+        "cursos": all_cursos,
+        "formRegistroCursos": CursoForm()
     }
     return render(request, "AppCoder/cursos.html", context=context)
 
-def estudiantes(request):
-    return render(request, "base.html")
+def busquedaCursos(request):
+    mi_formulario = BusquedaCursoForm(request.GET)
+    if mi_formulario.is_valid():
+        info = mi_formulario.cleaned_data
+        cursosFiltrados = Curso.objects.filter(nombre__icontains=info['nombre'])
+    else:
+        cursosFiltrados = None
 
-def profesores(request):
+    context = {
+        "form_busqueda": BusquedaCursoForm(),
+        'cursos': cursosFiltrados
+    }
+
+    return render(request, "AppCoder/busquedaCursos.html", context=context)
+
+def registroProfesores(request):
 
     if request.method == 'POST':
-        formProfesor = ProfesorForm(request.POST)
+        formRegistroProfesores = ProfesorForm(request.POST)
 
-        if formProfesor.is_valid():
-            informacion = formProfesor.cleaned_data
-            profe_save = Profesor(
-                nombre=informacion['nombre'],
-                apellido=informacion['apellido'],
-                email=informacion['email'],
-                profesion=informacion['profesion']
+        if formRegistroProfesores.is_valid():
+            info = formRegistroProfesores.cleaned_data
+            registroProfesor = Profesor(
+                nombre=info['nombre'],
+                apellido=info['apellido'],
+                email=info['email'],
+                profesion=info['profesion']
             )
-            profe_save.save()
+            registroProfesor.save()
+            messages.success(request, '¡Profesor registrado con éxito!')
 
-    allProfesores = Profesor.objects.all()
     context = {
-        "Profesores": allProfesores,
-        "form": ProfesorForm()
+        "formRegistroProfesores": ProfesorForm()
     }
+
     return render(request, "AppCoder/registroProfesores.html", context=context)
 
 def registroEstudiante(request):
 
-    if request.method == 'POST':
-
-        estudiante = Estudiante(request.POST['nombre'],
-                                request.POST['apellido'],
-                                request.POST['email'])
+    if request.method == "POST":
+        estudiante = Estudiante(nombre=request.POST['nombre'],
+                                apellido=request.POST['apellido'],
+                                email=request.POST['email'])
         estudiante.save()
 
-        return render(request, "base.html")
+        return redirect('Home')
 
     return render(request, "AppCoder/registroEstudiante.html")

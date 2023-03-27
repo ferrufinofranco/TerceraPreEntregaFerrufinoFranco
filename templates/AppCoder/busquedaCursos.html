@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% block contenidoNavBar %}
+    <form action="{% url 'AppCoderBusquedaCursos' %}" method="GET">
+        {{ form_busqueda.as_p }}
+        <input type="submit" value="Buscar Curso">
+    </form>
+    {% if cursos %}
+        {% for curso in cursos %}
+            <p>Curso: {{ curso.nombre }} - Camada: {{ curso.camada }}</p>
+        {% endfor %}
+    {% elif cursos is None %}
+        <h3>Ingrese una búsqueda para ver los cursos disponibles</h3>
+    {% else %}
+        <h3>No se encontraron cursos para la búsqueda </h3>
+    {% endif %}
+{% endblock %}
