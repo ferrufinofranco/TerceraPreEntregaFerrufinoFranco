@@ -24,7 +24,7 @@ def registroCursos(request):
         "cursos": all_cursos,
         "formRegistroCursos": CursoForm()
     }
-    return render(request, "AppCoder/cursos.html", context=context)
+    return render(request, "AppCoder/registroCursos.html", context=context)
 
 def busquedaCursos(request):
     mi_formulario = BusquedaCursoForm(request.GET)
