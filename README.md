@@ -2,13 +2,21 @@
 
 Rutas de acceso:
 
-http://127.0.0.1:8000/coder/home.html
+http://127.0.0.1:8000/coder/home/ 
+http://127.0.0.1:8000/coder/registroProfesores/ 
+http://127.0.0.1:8000/coder/registroCursos/
+http://127.0.0.1:8000/coder/busquedaCursos/ 
+http://127.0.0.1:8000/coder/registroEstudiante/
 
-No pude finalizar el proyecto. 
-Resta darle formato a base.html para que posea un aspecto mas relacionado al uso que se le va a dar y realizar el form de busqueda (No me terminó de salir en varios intentos y tuve que rehacer el codigo, en esta version no lo incluí para poder completar lo demas)
+El proyecto esta hecho sobre un template extraido de https://getbootstrap.com/
 
-La pestaña de cursos usa la API de django. Registra correctamente y se visualiza a traves del html los cursos que se registran.
+En el mismo puedes visualizar dentro del navbar distintas opciones que te redigiran al "Inicio", registros de cursos, profesores y estudiante. Y busqueda de cursos filtrando por nombre del curso.
 
-La pestaña de profesores usa la API de django. Registra correctamente y se visualiza a traves del html los cursos que se registran.
+Dentro de http://127.0.0.1:8000/coder/registroProfesores/ se registran profesores dentro de la base de datos, muestra un mensaje de registro exitoso. Hecho con API Django.
 
-La pestaña de registro de  usa el formulario de registro por html, da error al registrar y retorna a http://127.0.0.1:8000/registroEstudiante/ (inexistente). Se esta revisando el error
+Dentro de http://127.0.0.1:8000/coder/registroCursos/ se registran cursos dentro de la base de datos. Hecho con API Django.
+
+Dentro de http://127.0.0.1:8000/coder/registroEstudiante/ se registran estudiantes dentro de la base de datos. Hecho sin API Django, redirige a un HTML donde se visualiza el formulario.
+
+Dentro de http://127.0.0.1:8000/coder/busquedaCursos/ se realiza la busqueda por nombre de cursos. La misma devuelve un listado de cursos que coincidan con la busqueda y las comisiones.
+
